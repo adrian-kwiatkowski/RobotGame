@@ -1,4 +1,7 @@
 import UIKit
+import RxRelay
+import RxSwift
+import RxCocoa
 
 class GameView: UIView {
     
@@ -12,8 +15,10 @@ class GameView: UIView {
     let xLabelStepper = LabelStepperView()
     let yLabelStepper = LabelStepperView()
     let directionLabel = UILabel()
-    let directionSegmentedControl = UISegmentedControl(items: ["North", "East", "South", "West"])
-    let startGameButton = UIButton(type: .roundedRect)
+    let directionSegmentedControl = UISegmentedControl(items: ["N", "E", "S", "W"])
+    let commandsLabel = UILabel()
+    let commandsTextField = UITextField()
+    let startGameButton = UIButton(type: .system)
     let resultsLabel = UILabel()
     let resultsValueLabel = UILabel()
     
@@ -22,6 +27,7 @@ class GameView: UIView {
         super.init(frame: .zero)
         setupUI()
         setupConstraints()
+        bindUI()
     }
     
     required init?(coder: NSCoder) {
@@ -38,6 +44,8 @@ class GameView: UIView {
                     yLabelStepper,
                     directionLabel,
                     directionSegmentedControl,
+                    commandsLabel,
+                    commandsTextField,
                     startGameButton,
                     resultsLabel,
                     resultsValueLabel)
@@ -49,22 +57,50 @@ class GameView: UIView {
         
         roomSetupLabel.text = "Room setup:"
         widthLabelStepper.titleLabel.text = "width:"
-        widthLabelStepper.valueLabel.text = "1"
+        widthLabelStepper.stepper.minimumValue = 1.0
         lengthLabelStepper.titleLabel.text = "length:"
-        lengthLabelStepper.valueLabel.text = "2"
+        lengthLabelStepper.stepper.minimumValue = 1.0
         
         robotSetupLabel.text = "Robot setup:"
         xLabelStepper.titleLabel.text = "x:"
-        xLabelStepper.valueLabel.text = "1"
         yLabelStepper.titleLabel.text = "y:"
-        yLabelStepper.valueLabel.text = "1"
         directionLabel.text = "Direction:"
         directionSegmentedControl.selectedSegmentIndex = 0
         
+        commandsLabel.text = "Commands (L, R, F):"
+        commandsTextField.borderStyle = .roundedRect
+        commandsTextField.textAlignment = .right
+        
         startGameButton.setTitle("Start game", for: .normal)
+        startGameButton.backgroundColor = .systemBlue
+        startGameButton.setTitleColor(UIColor.white, for: .normal)
+        startGameButton.layer.cornerRadius = 16
         
         resultsLabel.text = "Result:"
-        resultsValueLabel.text = "(1, 2) N"
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.frame.origin.y == 0 {
+                self.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.frame.origin.y != 0 {
+            self.frame.origin.y = 0
+        }
+    }
+    
+    @objc func dismissKeyboard() {
+        endEditing(true)
     }
     
     func setupConstraints() {
@@ -77,6 +113,8 @@ class GameView: UIView {
         yLabelStepper.translatesAutoresizingMaskIntoConstraints = false
         directionLabel.translatesAutoresizingMaskIntoConstraints = false
         directionSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        commandsLabel.translatesAutoresizingMaskIntoConstraints = false
+        commandsTextField.translatesAutoresizingMaskIntoConstraints = false
         startGameButton.translatesAutoresizingMaskIntoConstraints = false
         resultsLabel.translatesAutoresizingMaskIntoConstraints = false
         resultsValueLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -114,11 +152,19 @@ class GameView: UIView {
             
             directionSegmentedControl.leadingAnchor.constraint(equalTo: directionLabel.trailingAnchor, constant: 32.0),
             directionSegmentedControl.centerYAnchor.constraint(equalTo: directionLabel.centerYAnchor),
-            directionSegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32.0),
+            directionSegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
             
-            startGameButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32.0),
-            startGameButton.topAnchor.constraint(equalTo: directionLabel.bottomAnchor, constant: 16.0),
-            startGameButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32.0),
+            commandsLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
+            commandsLabel.topAnchor.constraint(equalTo: directionLabel.bottomAnchor, constant: 32.0),
+            
+            commandsTextField.leadingAnchor.constraint(equalTo: commandsLabel.trailingAnchor, constant: 32.0),
+            commandsTextField.centerYAnchor.constraint(equalTo: commandsLabel.centerYAnchor),
+            commandsTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
+            
+            startGameButton.topAnchor.constraint(equalTo: commandsLabel.bottomAnchor, constant: 32.0),
+            startGameButton.heightAnchor.constraint(equalToConstant: 40.0),
+            startGameButton.widthAnchor.constraint(equalToConstant: 120.0),
+            startGameButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             resultsLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
             resultsLabel.topAnchor.constraint(equalTo: startGameButton.bottomAnchor, constant: 16.0),
@@ -127,5 +173,71 @@ class GameView: UIView {
             resultsValueLabel.centerYAnchor.constraint(equalTo: resultsLabel.centerYAnchor),
             resultsValueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0)
         ])
+    }
+    
+    func bindUI() {
+        viewModel.widthRelay.asDriver().drive(onNext: {
+            self.widthLabelStepper.valueLabel.text = "\(Int($0))"
+            self.xLabelStepper.stepper.maximumValue = Double($0) - 1.0
+            self.xLabelStepper.stepper.sendActions(for: .valueChanged)
+        }).disposed(by: viewModel.disposeBag)
+        
+        viewModel.lengthRelay.asDriver().drive(onNext: {
+            self.lengthLabelStepper.valueLabel.text = "\(Int($0))"
+            self.yLabelStepper.stepper.maximumValue = Double($0) - 1.0
+            self.yLabelStepper.stepper.sendActions(for: .valueChanged)
+        }).disposed(by: viewModel.disposeBag)
+        
+        viewModel.xRelay.asDriver().drive(onNext: {
+            self.xLabelStepper.valueLabel.text = "\(Int($0))"
+        }).disposed(by: viewModel.disposeBag)
+        
+        viewModel.yRelay.asDriver().drive(onNext: {
+            self.yLabelStepper.valueLabel.text = "\(Int($0))"
+        }).disposed(by: viewModel.disposeBag)
+        
+        viewModel.resultsRelay.asDriver().drive(onNext: {
+            self.resultsValueLabel.text = $0
+        }).disposed(by: viewModel.disposeBag)
+        
+        widthLabelStepper.stepper.rx.controlEvent(.valueChanged)
+            .withLatestFrom(widthLabelStepper.stepper.rx.value)
+            .bind(onNext: {
+                self.viewModel.widthStepperValueChanged(Int($0))
+            }).disposed(by: viewModel.disposeBag)
+        
+        lengthLabelStepper.stepper.rx.controlEvent(.valueChanged)
+            .withLatestFrom(lengthLabelStepper.stepper.rx.value)
+            .bind(onNext: {
+                self.viewModel.lengthStepperValueChanged(Int($0))
+            }).disposed(by: viewModel.disposeBag)
+        
+        xLabelStepper.stepper.rx.controlEvent(.valueChanged)
+            .withLatestFrom(xLabelStepper.stepper.rx.value)
+            .bind(onNext: {
+                self.viewModel.xStepperValueChanged(Int($0))
+            }).disposed(by: viewModel.disposeBag)
+        
+        yLabelStepper.stepper.rx.controlEvent(.valueChanged)
+            .withLatestFrom(yLabelStepper.stepper.rx.value)
+            .bind(onNext: {
+                self.viewModel.yStepperValueChanged(Int($0))
+            }).disposed(by: viewModel.disposeBag)
+        
+        directionSegmentedControl.rx.controlEvent(.valueChanged)
+            .withLatestFrom(directionSegmentedControl.rx.value)
+            .bind(onNext: {
+                self.viewModel.directionControlTapped($0)
+            }).disposed(by: viewModel.disposeBag)
+        
+        commandsTextField.rx.controlEvent(.editingChanged)
+            .withLatestFrom(commandsTextField.rx.text.orEmpty)
+            .bind(onNext: {
+                self.viewModel.commandsTyped($0)
+            }).disposed(by: viewModel.disposeBag)
+        
+        startGameButton.rx.tap.bind(onNext: {
+            self.viewModel.startGame()
+        }).disposed(by: viewModel.disposeBag)
     }
 }
