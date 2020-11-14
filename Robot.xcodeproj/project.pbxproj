@@ -17,9 +17,7 @@
 		DAC123BF255C75C7003208A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC123BE255C75C7003208A0 /* AppDelegate.swift */; };
 		DAC123C1255C75C7003208A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC123C0255C75C7003208A0 /* SceneDelegate.swift */; };
 		DAC123C3255C75C7003208A0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC123C2255C75C7003208A0 /* ViewController.swift */; };
-		DAC123C6255C75C7003208A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAC123C4255C75C7003208A0 /* Main.storyboard */; };
 		DAC123C8255C75C8003208A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAC123C7255C75C8003208A0 /* Assets.xcassets */; };
-		DAC123CB255C75C8003208A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAC123C9255C75C8003208A0 /* LaunchScreen.storyboard */; };
 		DAC123F8255C764C003208A0 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC123F7255C764C003208A0 /* Direction.swift */; };
 		DAC12402255C7BA0003208A0 /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC12401255C7BA0003208A0 /* Robot.swift */; };
 		DAC12406255C7BCA003208A0 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC12405255C7BCA003208A0 /* Point.swift */; };
@@ -50,9 +48,7 @@
 		DAC123BE255C75C7003208A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DAC123C0255C75C7003208A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DAC123C2255C75C7003208A0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		DAC123C5255C75C7003208A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DAC123C7255C75C8003208A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		DAC123CA255C75C8003208A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DAC123CC255C75C8003208A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAC123D1255C75C8003208A0 /* RobotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RobotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAC123D7255C75C8003208A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -92,6 +88,14 @@
 			path = Stubs;
 			sourceTree = "<group>";
 		};
+		DA58DCA825601FFD004B7F34 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				DAC123C2255C75C7003208A0 /* ViewController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
 		DAC123B2255C75C7003208A0 = {
 			isa = PBXGroup;
 			children = (
@@ -113,8 +117,12 @@
 		DAC123BD255C75C7003208A0 /* Robot */ = {
 			isa = PBXGroup;
 			children = (
+				DAC123CC255C75C8003208A0 /* Info.plist */,
+				DAC123C7255C75C8003208A0 /* Assets.xcassets */,
+				DAC123C0255C75C7003208A0 /* SceneDelegate.swift */,
+				DAC123BE255C75C7003208A0 /* AppDelegate.swift */,
+				DA58DCA825601FFD004B7F34 /* Presentation */,
 				DAD297332560193600119F73 /* Model */,
-				DAC123F3255C75E1003208A0 /* Default */,
 			);
 			path = Robot;
 			sourceTree = "<group>";
@@ -130,20 +138,6 @@
 				DAC123D7255C75C8003208A0 /* Info.plist */,
 			);
 			path = RobotTests;
-			sourceTree = "<group>";
-		};
-		DAC123F3255C75E1003208A0 /* Default */ = {
-			isa = PBXGroup;
-			children = (
-				DAC123CC255C75C8003208A0 /* Info.plist */,
-				DAC123C7255C75C8003208A0 /* Assets.xcassets */,
-				DAC123C9255C75C8003208A0 /* LaunchScreen.storyboard */,
-				DAC123C4255C75C7003208A0 /* Main.storyboard */,
-				DAC123BE255C75C7003208A0 /* AppDelegate.swift */,
-				DAC123C0255C75C7003208A0 /* SceneDelegate.swift */,
-				DAC123C2255C75C7003208A0 /* ViewController.swift */,
-			);
-			path = Default;
 			sourceTree = "<group>";
 		};
 		DAD297332560193600119F73 /* Model */ = {
@@ -239,9 +233,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DAC123CB255C75C8003208A0 /* LaunchScreen.storyboard in Resources */,
 				DAC123C8255C75C8003208A0 /* Assets.xcassets in Resources */,
-				DAC123C6255C75C7003208A0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,25 +286,6 @@
 			targetProxy = DAC123D2255C75C8003208A0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		DAC123C4255C75C7003208A0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DAC123C5255C75C7003208A0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		DAC123C9255C75C8003208A0 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DAC123CA255C75C8003208A0 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		DAC123E3255C75C8003208A0 /* Debug */ = {
@@ -438,7 +411,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C63X5Q2KR6;
-				INFOPLIST_FILE = Robot/Default/Info.plist;
+				INFOPLIST_FILE = Robot/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -446,7 +419,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = AK.Robot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -457,7 +430,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C63X5Q2KR6;
-				INFOPLIST_FILE = Robot/Default/Info.plist;
+				INFOPLIST_FILE = Robot/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -465,7 +438,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = AK.Robot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
