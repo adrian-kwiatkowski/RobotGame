@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA147FC72560263500DC8A89 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA147FC62560263500DC8A89 /* GameViewModel.swift */; };
+		DA147FCB2560263C00DC8A89 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA147FCA2560263C00DC8A89 /* GameView.swift */; };
+		DA147FD225602AB100DC8A89 /* UIStackView+addArrangedSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA147FD125602AB100DC8A89 /* UIStackView+addArrangedSubviews.swift */; };
 		DA1F727D255C92D600E9341E /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F727C255C92D600E9341E /* Game.swift */; };
 		DA1F7281255C9C1200E9341E /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F7280255C9C1200E9341E /* Room.swift */; };
 		DA1F7285255C9C3300E9341E /* RoomTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F7284255C9C3300E9341E /* RoomTests.swift */; };
@@ -14,9 +17,10 @@
 		DA1F7290255CA92B00E9341E /* PointStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F728F255CA92B00E9341E /* PointStub.swift */; };
 		DA1F7296255CAE7A00E9341E /* RoomStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F7295255CAE7A00E9341E /* RoomStub.swift */; };
 		DA1F729A255CAEE700E9341E /* RobotStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F7299255CAEE700E9341E /* RobotStub.swift */; };
+		DA51B43B256048EA00E96D81 /* LabelStepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA51B43A256048EA00E96D81 /* LabelStepperView.swift */; };
 		DAC123BF255C75C7003208A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC123BE255C75C7003208A0 /* AppDelegate.swift */; };
 		DAC123C1255C75C7003208A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC123C0255C75C7003208A0 /* SceneDelegate.swift */; };
-		DAC123C3255C75C7003208A0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC123C2255C75C7003208A0 /* ViewController.swift */; };
+		DAC123C3255C75C7003208A0 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC123C2255C75C7003208A0 /* GameViewController.swift */; };
 		DAC123C8255C75C8003208A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAC123C7255C75C8003208A0 /* Assets.xcassets */; };
 		DAC123F8255C764C003208A0 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC123F7255C764C003208A0 /* Direction.swift */; };
 		DAC12402255C7BA0003208A0 /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC12401255C7BA0003208A0 /* Robot.swift */; };
@@ -37,6 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA147FC62560263500DC8A89 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		DA147FCA2560263C00DC8A89 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		DA147FD125602AB100DC8A89 /* UIStackView+addArrangedSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+addArrangedSubviews.swift"; sourceTree = "<group>"; };
 		DA1F727C255C92D600E9341E /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		DA1F7280255C9C1200E9341E /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		DA1F7284255C9C3300E9341E /* RoomTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTests.swift; sourceTree = "<group>"; };
@@ -44,10 +51,11 @@
 		DA1F728F255CA92B00E9341E /* PointStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointStub.swift; sourceTree = "<group>"; };
 		DA1F7295255CAE7A00E9341E /* RoomStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomStub.swift; sourceTree = "<group>"; };
 		DA1F7299255CAEE700E9341E /* RobotStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotStub.swift; sourceTree = "<group>"; };
+		DA51B43A256048EA00E96D81 /* LabelStepperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStepperView.swift; sourceTree = "<group>"; };
 		DAC123BB255C75C7003208A0 /* Robot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Robot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAC123BE255C75C7003208A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DAC123C0255C75C7003208A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DAC123C2255C75C7003208A0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DAC123C2255C75C7003208A0 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		DAC123C7255C75C8003208A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DAC123CC255C75C8003208A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAC123D1255C75C8003208A0 /* RobotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RobotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +86,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA147FD025602A9C00DC8A89 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DA147FD125602AB100DC8A89 /* UIStackView+addArrangedSubviews.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		DA1F728E255CA91500E9341E /* Stubs */ = {
 			isa = PBXGroup;
 			children = (
@@ -91,7 +107,10 @@
 		DA58DCA825601FFD004B7F34 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				DAC123C2255C75C7003208A0 /* ViewController.swift */,
+				DA51B43A256048EA00E96D81 /* LabelStepperView.swift */,
+				DAC123C2255C75C7003208A0 /* GameViewController.swift */,
+				DA147FCA2560263C00DC8A89 /* GameView.swift */,
+				DA147FC62560263500DC8A89 /* GameViewModel.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -123,6 +142,7 @@
 				DAC123BE255C75C7003208A0 /* AppDelegate.swift */,
 				DA58DCA825601FFD004B7F34 /* Presentation */,
 				DAD297332560193600119F73 /* Model */,
+				DA147FD025602A9C00DC8A89 /* Extensions */,
 			);
 			path = Robot;
 			sourceTree = "<group>";
@@ -251,14 +271,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA147FD225602AB100DC8A89 /* UIStackView+addArrangedSubviews.swift in Sources */,
 				DAC12402255C7BA0003208A0 /* Robot.swift in Sources */,
-				DAC123C3255C75C7003208A0 /* ViewController.swift in Sources */,
+				DAC123C3255C75C7003208A0 /* GameViewController.swift in Sources */,
 				DA1F7281255C9C1200E9341E /* Room.swift in Sources */,
 				DA1F727D255C92D600E9341E /* Game.swift in Sources */,
 				DAC12406255C7BCA003208A0 /* Point.swift in Sources */,
+				DA147FCB2560263C00DC8A89 /* GameView.swift in Sources */,
 				DAD297302560190C00119F73 /* Command.swift in Sources */,
+				DA51B43B256048EA00E96D81 /* LabelStepperView.swift in Sources */,
 				DAC123BF255C75C7003208A0 /* AppDelegate.swift in Sources */,
 				DAC123C1255C75C7003208A0 /* SceneDelegate.swift in Sources */,
+				DA147FC72560263500DC8A89 /* GameViewModel.swift in Sources */,
 				DAC123F8255C764C003208A0 /* Direction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
