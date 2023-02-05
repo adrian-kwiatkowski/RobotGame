@@ -1,58 +1,57 @@
-import RxRelay
-import RxSwift
+import Combine
 
 class GameViewModel {
     
-    let disposeBag = DisposeBag()
+    var cancellables = Set<AnyCancellable>()
     
-    let widthRelay = BehaviorRelay(value: 1)
-    let lengthRelay = BehaviorRelay(value: 1)
-    let xRelay = BehaviorRelay(value: 0)
-    let yRelay = BehaviorRelay(value: 0)
-    let directionRelay = BehaviorRelay(value: Direction.north)
-    let commandsRelay = BehaviorRelay(value: "")
+    let widthRelay = CurrentValueSubject<Int, Never>(1)
+    let lengthRelay = CurrentValueSubject<Int, Never>(1)
+    let xRelay = CurrentValueSubject<Int, Never>(0)
+    let yRelay = CurrentValueSubject<Int, Never>(0)
+    let directionRelay = CurrentValueSubject<Direction, Never>(Direction.north)
+    let commandsRelay = CurrentValueSubject<String, Never>("")
     
-    let resultsRelay = BehaviorRelay(value: "")
+    let resultsRelay = CurrentValueSubject<String, Never>("")
     
     func widthStepperValueChanged(_ newValue: Int) {
-        widthRelay.accept(newValue)
+        widthRelay.send(newValue)
     }
     
     func lengthStepperValueChanged(_ newValue: Int) {
-        lengthRelay.accept(newValue)
+        lengthRelay.send(newValue)
     }
     
     func xStepperValueChanged(_ newValue: Int) {
-        xRelay.accept(newValue)
+        xRelay.send(newValue)
     }
     
     func yStepperValueChanged(_ newValue: Int) {
-        yRelay.accept(newValue)
+        yRelay.send(newValue)
     }
     
     func directionControlTapped(_ newValue: Int) {
         guard let newDirection = Direction(rawValue: newValue) else { return }
-        directionRelay.accept(newDirection)
+        directionRelay.send(newDirection)
     }
     
     func commandsTyped(_ commands: String) {
-        commandsRelay.accept(commands)
+        commandsRelay.send(commands)
     }
     
     func startGame() {
         guard let room = Room(width: widthRelay.value, length: lengthRelay.value) else {
-            resultsRelay.accept("Unable to create room")
+            resultsRelay.send("Unable to create room")
             return
         }
         let startingPoint = Point(x: xRelay.value, y: yRelay.value)
         let robot = Robot(coordinates: startingPoint, direction: directionRelay.value)
         guard var game = Game(room: room, robot: robot, commands: commandsRelay.value) else {
-            resultsRelay.accept("unable to create game")
+            resultsRelay.send("unable to create game")
             return
         }
         
         game.start()
         
-        resultsRelay.accept("(\(game.robot.coordinates.x), \(game.robot.coordinates.y)) \(game.robot.direction.initialLetter)")
+        resultsRelay.send("(\(game.robot.coordinates.x), \(game.robot.coordinates.y)) \(game.robot.direction.initialLetter)")
     }
 }

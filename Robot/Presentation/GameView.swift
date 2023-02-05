@@ -1,7 +1,4 @@
 import UIKit
-import RxRelay
-import RxSwift
-import RxCocoa
 
 class GameView: UIView {
     
@@ -175,69 +172,72 @@ class GameView: UIView {
         ])
     }
     
+    @objc private func widthLabelStepperValueChanged(_ sender: UIStepper) {
+        viewModel.widthStepperValueChanged(Int(sender.value))
+    }
+    
+    @objc private func lengthLabelStepperValueChanged(_ sender: UIStepper) {
+        viewModel.lengthStepperValueChanged(Int(sender.value))
+    }
+    
+    @objc private func xLabelStepperValueChanged(_ sender: UIStepper) {
+        viewModel.xStepperValueChanged(Int(sender.value))
+    }
+    
+    @objc private func yLabelStepperValueChanged(_ sender: UIStepper) {
+        viewModel.yStepperValueChanged(Int(sender.value))
+    }
+    
+    @objc private func directionSegmentedControlValueChanged(_ sender: UISegmentedControl) {
+        viewModel.directionControlTapped(sender.selectedSegmentIndex)
+    }
+    
+    @objc private func commandsTextFieldValueChanged(_ sender: UITextField) {
+        viewModel.commandsTyped(sender.text ?? "")
+    }
+    
+    @objc private func startGameButtonTapped(_ sender: UIButton) {
+        endEditing(true)
+        viewModel.startGame()
+    }
+    
     func bindUI() {
-        viewModel.widthRelay.asDriver().drive(onNext: {
+        viewModel.widthRelay.sink {
             self.widthLabelStepper.valueLabel.text = "\(Int($0))"
             self.xLabelStepper.stepper.maximumValue = Double($0) - 1.0
             self.xLabelStepper.stepper.sendActions(for: .valueChanged)
-        }).disposed(by: viewModel.disposeBag)
+        }.store(in: &viewModel.cancellables)
         
-        viewModel.lengthRelay.asDriver().drive(onNext: {
+        viewModel.lengthRelay.sink {
             self.lengthLabelStepper.valueLabel.text = "\(Int($0))"
             self.yLabelStepper.stepper.maximumValue = Double($0) - 1.0
             self.yLabelStepper.stepper.sendActions(for: .valueChanged)
-        }).disposed(by: viewModel.disposeBag)
+        }.store(in: &viewModel.cancellables)
         
-        viewModel.xRelay.asDriver().drive(onNext: {
+        viewModel.xRelay.sink {
             self.xLabelStepper.valueLabel.text = "\(Int($0))"
-        }).disposed(by: viewModel.disposeBag)
+        }.store(in: &viewModel.cancellables)
         
-        viewModel.yRelay.asDriver().drive(onNext: {
+        viewModel.yRelay.sink {
             self.yLabelStepper.valueLabel.text = "\(Int($0))"
-        }).disposed(by: viewModel.disposeBag)
+        }.store(in: &viewModel.cancellables)
         
-        viewModel.resultsRelay.asDriver().drive(onNext: {
+        viewModel.resultsRelay.sink {
             self.resultsValueLabel.text = $0
-        }).disposed(by: viewModel.disposeBag)
+        }.store(in: &viewModel.cancellables)
         
-        widthLabelStepper.stepper.rx.controlEvent(.valueChanged)
-            .withLatestFrom(widthLabelStepper.stepper.rx.value)
-            .bind(onNext: {
-                self.viewModel.widthStepperValueChanged(Int($0))
-            }).disposed(by: viewModel.disposeBag)
+        widthLabelStepper.stepper.addTarget(self, action: #selector(widthLabelStepperValueChanged(_:)), for: .valueChanged)
         
-        lengthLabelStepper.stepper.rx.controlEvent(.valueChanged)
-            .withLatestFrom(lengthLabelStepper.stepper.rx.value)
-            .bind(onNext: {
-                self.viewModel.lengthStepperValueChanged(Int($0))
-            }).disposed(by: viewModel.disposeBag)
+        lengthLabelStepper.stepper.addTarget(self, action: #selector(lengthLabelStepperValueChanged(_:)), for: .valueChanged)
         
-        xLabelStepper.stepper.rx.controlEvent(.valueChanged)
-            .withLatestFrom(xLabelStepper.stepper.rx.value)
-            .bind(onNext: {
-                self.viewModel.xStepperValueChanged(Int($0))
-            }).disposed(by: viewModel.disposeBag)
+        xLabelStepper.stepper.addTarget(self, action: #selector(xLabelStepperValueChanged(_:)), for: .valueChanged)
         
-        yLabelStepper.stepper.rx.controlEvent(.valueChanged)
-            .withLatestFrom(yLabelStepper.stepper.rx.value)
-            .bind(onNext: {
-                self.viewModel.yStepperValueChanged(Int($0))
-            }).disposed(by: viewModel.disposeBag)
+        yLabelStepper.stepper.addTarget(self, action: #selector(yLabelStepperValueChanged(_:)), for: .valueChanged)
         
-        directionSegmentedControl.rx.controlEvent(.valueChanged)
-            .withLatestFrom(directionSegmentedControl.rx.value)
-            .bind(onNext: {
-                self.viewModel.directionControlTapped($0)
-            }).disposed(by: viewModel.disposeBag)
+        directionSegmentedControl.addTarget(self, action: #selector(directionSegmentedControlValueChanged(_:)), for: .valueChanged)
         
-        commandsTextField.rx.controlEvent(.editingChanged)
-            .withLatestFrom(commandsTextField.rx.text.orEmpty)
-            .bind(onNext: {
-                self.viewModel.commandsTyped($0)
-            }).disposed(by: viewModel.disposeBag)
+        commandsTextField.addTarget(self, action: #selector(commandsTextFieldValueChanged(_:)), for: .editingChanged)
         
-        startGameButton.rx.tap.bind(onNext: {
-            self.viewModel.startGame()
-        }).disposed(by: viewModel.disposeBag)
+        startGameButton.addTarget(self, action: #selector(startGameButtonTapped(_:)), for: .touchUpInside)
     }
 }
